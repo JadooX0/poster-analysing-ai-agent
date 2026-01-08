@@ -1,5 +1,10 @@
 # poster-analysing-ai-agent
-
+event-planner-llm/
+├── main.py # Primary Streamlit application logic
+├── requirements.txt # Project dependencies (Streamlit, LangChain, etc.)
+├── .env # Local environment variables (API keys)
+├── .streamlit/ # Streamlit-specific configuration 
+│ └── secrets.toml # Production secrets (for Cloud deployment) ├── assets/ # Static files │ └── logo.png # App branding └── utils/ # Helper functions (optional) └── image_processing.py # Image encoding and cleanup
 
 
 
