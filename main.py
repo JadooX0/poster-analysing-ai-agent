@@ -2,9 +2,7 @@ import streamlit as st
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, AIMessage
 import os
-import dotenv
 
-dotenv.load_dotenv()
 
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = [] 
@@ -64,3 +62,4 @@ if prompt := st.chat_input("Ex: 'What is the dress code?' or 'Is there a contact
                 st.markdown(response.content)
 
                 st.session_state.chat_history.append(AIMessage(content=response.content))
+
