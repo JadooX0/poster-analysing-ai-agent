@@ -2,6 +2,8 @@ import streamlit as st
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, AIMessage
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 
 if "chat_history" not in st.session_state:
@@ -14,9 +16,14 @@ if st.button("Clear Chat History"):
 
         
 llm = ChatOpenAI(
-    model="qwen/qwen2.5-vl-72b-instruct", 
-    api_key=st.secrets("OPENROUTER_API_KEY"),
-    openai_api_base="https://openrouter.ai/api/v1"
+    model=SELECTED_MODEL, 
+    api_key=st.secrets["OPENROUTER_API_KEY"],
+    openai_api_base="https://openrouter.ai/api/v1",
+    max_tokens=500, 
+    default_headers={
+        "HTTP-Referer": "http://localhost:8501", 
+        "X-Title": "Event Planner Assistant"
+    }
 )
 
 st.title("Event Assistant")
@@ -62,4 +69,5 @@ if prompt := st.chat_input("Ex: 'What is the dress code?' or 'Is there a contact
                 st.markdown(response.content)
 
                 st.session_state.chat_history.append(AIMessage(content=response.content))
+
 
