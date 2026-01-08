@@ -17,7 +17,7 @@ if st.button("Clear Chat History"):
         
 llm = ChatOpenAI(
     model="qwen/qwen2.5-vl-72b-instruct", 
-    api_key=os.getenv("OPENROUTER_API_KEY"),
+    api_key=st.secrets("OPENROUTER_API_KEY"),
     openai_api_base="https://openrouter.ai/api/v1"
 )
 
@@ -62,4 +62,5 @@ if prompt := st.chat_input("Ex: 'What is the dress code?' or 'Is there a contact
             with st.spinner("Analyzing poster details..."):
                 response = llm.invoke([HumanMessage(content=payload)])
                 st.markdown(response.content)
+
                 st.session_state.chat_history.append(AIMessage(content=response.content))
